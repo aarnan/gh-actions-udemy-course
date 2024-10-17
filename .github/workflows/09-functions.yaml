@@ -8,19 +8,30 @@ jobs:
   echo1:
     runs-on: ubuntu-latest
     steps:
+      - name: Print PR title
+        run: |
+          echo "PR title: ${{ github.event.pull_request.title }}"
+      - name: PPrint PR labels
+        run: |
+          echo "PR title: "
+          echo ${{ toJSON(github.event.pull_request.labels) }} | jq '.[] | .name'
+      - name: Bug step
+        if: ${{ failure() && !cancelled() && contains(github.event.pull_request.title, 'fix') }}
+        run: |
+          echo "I am a bug fix"
       - name: Sleep for 20 seconds
         run: sleep 20
       - name: Failing step
         run: exit 1
       - name: I will be skipped
-        if: success()
+        if: ${{ success() }}
         run: echo "I will print if previous steps succeed."
       - name: I will execute
-        if: failure()
+        if: ${{ failure() }}
         run: echo "I will print if any previous step fails."
       - name: I will execute
         if: ${{ !cancelled() }}
         run: echo "I will always print, except when the workflow is cancelled."
       - name: I will execute when cancelled
-        if: cancelled()
+        if: ${{ cancelled() }}
         run: echo "I will execute when cancelled"
