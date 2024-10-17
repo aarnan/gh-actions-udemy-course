@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Failing step
         run: exit 8
+        continue-on-error: true
       - name: I will be skipped
         if: success()
         run: echo "I will print if previous steps succeed."
