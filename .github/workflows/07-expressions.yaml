@@ -5,22 +5,22 @@ on:
     inputs:
       debug:
         type: boolean
-        default: true
+        default: false
 
-run-name: 07 - Using Expressions | DEBUG - ${{ inputs.debug == 'true' && 'ON' || 'OFF' }}
+run-name: 07 - Using Expressions | DEBUG - ${{ inputs.debug == true && 'ON' || 'OFF' }}
 jobs:
   echo:
     runs-on: ubuntu-latest
     steps:
-      - name: Debug - Print start-up data
-        if: inputs.debug == 'true'
+      - name: "[debug] - Print start-up data"
+        if: ${{ inputs.debug }}
         run: |
           echo "Triggered by: ${{ github.event_name }}"
           echo "Branch: ${{ github.ref }}"
           echo "Commit SHA: ${{ github.sha }}"
           echo "Runner OS: ${{ runner.os }}"
-      - name: Debug - Print when triggered from main
-        if: inputs.debug == 'true' && github.ref == 'refs/heads/main'
+      - name: "[debug] - Print when triggered from main"
+        if: ${{ inputs.debug && github.ref == 'refs/heads/main' }}
         run: echo "I was triggered from main"
       - name: Greeting
         run: echo "Moi !!"
