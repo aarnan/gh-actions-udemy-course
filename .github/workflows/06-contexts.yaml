@@ -11,11 +11,11 @@ jobs:
       - name: Display Information
         run: |
           echo "Event name: ${{ github.event_name }}"
-          "Ref: ${{ github.ref}}"
-          "SHA: ${{ github.sha}}"
-          "Actor: ${{ github.actor}}"
-          "Workflow: ${{ github.workflow}}"
-          "Run ID: ${{ github.run_id}}"
-          "Run Number: ${{ github.run_number}}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Run Number: ${{ github.run_number }}"
       - name: Retrieve Variable
         run: echo "${{ secrets.MY_VAR }}"
