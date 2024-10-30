@@ -48,13 +48,17 @@ jobs:
         shape: [circle, square]
         size: [small, large]
         include:
-          - opacity: 50
+          - opacity: 50 ## if this was moved to th end, it would override the all values
           - color: red
             opacity: 70
           - shape: circle
             opacity: 100
           - color: red
             shape: triangle
+        exclude:
+          - color: green
+            shape: circle
+            size: large
     steps:
       - name: Dummy step
         run: |
