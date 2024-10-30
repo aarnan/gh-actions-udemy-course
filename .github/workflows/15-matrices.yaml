@@ -41,16 +41,21 @@ jobs:
 
   include-example:
     runs-on: ubuntu-latest
-    name: ${{ matrix.color }} - ${{ matrix.shape }} - ${{ matrix.size }}
+    name: ${{ matrix.color }} - ${{ matrix.shape }} - ${{ matrix.size }} - ${{ matrix.opacity }}
     strategy:
       matrix:
         color: [red, green]
         shape: [circle, square]
         size: [small, large]
         include:
+          - opacity: 50
+          - color: red
+            opacity: 70
+          - shape: circle
+            opacity: 100
           - color: red
             shape: triangle
     steps:
       - name: Dummy step
         run: |
-          echo "Running tests with color ${{ matrix.color }}, shape ${{ matrix.shape }}, and size ${{ matrix.size }}."
+          echo "Running tests with color ${{ matrix.color }}, shape ${{ matrix.shape }}, and size ${{ matrix.size }}.with ${{ matrix.opacity }}"
