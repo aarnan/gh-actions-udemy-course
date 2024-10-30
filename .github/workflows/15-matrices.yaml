@@ -2,10 +2,16 @@ name: 15 - Working with Matrices
 
 on:
   workflow_dispatch:
+    inputs:
+      run-backwards-compatibility:
+        description: "Run backwards compatibility tests"
+        required: false
+        default: "false"
 
 jobs:
   backwards-compatibility:
     name: ${{ matrix.os }} - Node ${{ matrix.node-version }}
+    if: ${{ github.event.inputs.run-backwards-compatibility == 'true' }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
